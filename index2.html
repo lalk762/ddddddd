@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Ката Киокусинкай</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(circle at 15% 10%, rgba(190, 70, 255, .55), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(100, 40, 220, .55), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(150, 40, 255, .35), transparent 35%),
+        linear-gradient(135deg, #090014, #19002f 45%, #08000f);
+
+    background-attachment: fixed;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: .4;
+    z-index: -1;
+}
+
+body::before {
+    background: #a020f0;
+    top: 100px;
+    left: -140px;
+}
+
+body::after {
+    background: #5420ff;
+    right: -140px;
+    bottom: 100px;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    width: 100%;
+    height: 64px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
+
+    background: rgba(20, 8, 35, .8);
+
+    border-bottom: 1px solid rgba(220, 160, 255, .2);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow: 0 5px 25px rgba(0,0,0,.3);
+}
+
+.logo {
+    font-size: 19px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    margin-right: 15px;
+
+    text-shadow: 0 0 15px rgba(200,100,255,.8);
+}
+
+.menu {
+    display: flex;
+    gap: 7px;
+
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.menu button {
+    border: 1px solid rgba(220,170,255,.18);
+    border-radius: 9px;
+
+    padding: 9px 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(120,50,190,.45),
+            rgba(50,20,90,.65)
+        );
+
+    color: white;
+
+    font-size: 13px;
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    padding: 14px 10px 30px;
+}
+
+.kata {
+    margin-bottom: 18px;
+}
+
+.kata-name {
+    font-size: 17px;
+    font-weight: bold;
+
+    margin: 0 4px 8px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 12px rgba(190,90,255,.7);
+}
+
+.card {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(70,30,105,.75),
+            rgba(20,8,35,.9)
+        );
+
+    border: 1px solid rgba(220,170,255,.18);
+
+    box-shadow:
+        0 8px 28px rgba(0,0,0,.35),
+        0 0 25px rgba(120,40,200,.08);
+
+    backdrop-filter: blur(8px);
+}
+
+.card iframe {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    display: block;
+}
+
+.video-link {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    color: white;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(170,70,255,.35),
+            transparent 55%
+        ),
+        linear-gradient(
+            135deg,
+            #35105c,
+            #12001f
+        );
+}
+
+.video-link-content {
+    text-align: center;
+}
+
+.play {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    font-size: 28px;
+
+    box-shadow:
+        0 0 30px rgba(180,80,255,.4);
+}
+
+.video-link-text {
+    font-size: 14px;
+    opacity: .9;
+}
+
+@media (max-width: 480px) {
+
+    .header {
+        height: 58px;
+        padding: 0 9px;
+    }
+
+    .logo {
+        font-size: 17px;
+        margin-right: 9px;
+    }
+
+    .menu {
+        gap: 5px;
+    }
+
+    .menu button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .content {
+        padding: 10px 7px 25px;
+    }
+
+    .kata {
+        margin-bottom: 15px;
+    }
+
+    .kata-name {
+        font-size: 15px;
+        margin-bottom: 7px;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        Ката Киокусинкай
+    </div>
+
+    <nav class="menu">
+
+        <button onclick="goTop()">
+            Главная
+        </button>
+
+        <button onclick="goBottom()">
+            Вниз ↓
+        </button>
+
+    </nav>
+
+</header>
+
+<main class="content">
+
+<!-- 1 -->
+<div class="kata">
+<div class="kata-name">1. Taikyoku Sono Ichi</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/NCS6QB3ODnM" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="kata">
+<div class="kata-name">2. Taikyoku Sono Ni</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/W-y0Myy8i9Q" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="kata">
+<div class="kata-name">3. Taikyoku Sono San</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/5j1i4LHSet0" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="kata">
+<div class="kata-name">4. Taikyoku Sono Ichi Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Taikyoku+Sono+Ichi+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="kata">
+<div class="kata-name">5. Taikyoku Sono Ni Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Taikyoku+Sono+Ni+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="kata">
+<div class="kata-name">6. Taikyoku Sono San Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/watch?v=BrIPgvgWx1M"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 7 -->
+<div class="kata">
+<div class="kata-name">7. Sokugi Taikyoku Sono Ichi</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/phXgDEtu9yY" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 8 -->
+<div class="kata">
+<div class="kata-name">8. Sokugi Taikyoku Sono Ni</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/Vec3TyNZU4Y" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 9 -->
+<div class="kata">
+<div class="kata-name">9. Sokugi Taikyoku Sono San</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/omiPbFzIMwE" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 10 -->
+<div class="kata">
+<div class="kata-name">10. Pinan Sono Ichi</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/WejnMH3Q21w" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 11 -->
+<div class="kata">
+<div class="kata-name">11. Pinan Sono Ni</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/6JLhRJdzJyA" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 12 -->
+<div class="kata">
+<div class="kata-name">12. Pinan Sono San</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/HcZ6ii6vTU4" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 13 -->
+<div class="kata">
+<div class="kata-name">13. Pinan Sono Yon</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/sQVnRK_5Oe4" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 14 -->
+<div class="kata">
+<div class="kata-name">14. Pinan Sono Go</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/Rock1v3ywcM?start=14" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 15 -->
+<div class="kata">
+<div class="kata-name">15. Pinan Sono Ichi Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/watch?v=Smy5FyZJS4Q"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 16 -->
+<div class="kata">
+<div class="kata-name">16. Pinan Sono Ni Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Pinan+Sono+Ni+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 17 -->
+<div class="kata">
+<div class="kata-name">17. Pinan Sono San Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Pinan+Sono+San+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 18 -->
+<div class="kata">
+<div class="kata-name">18. Pinan Sono Yon Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Pinan+Sono+Yon+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 19 -->
+<div class="kata">
+<div class="kata-name">19. Pinan Sono Go Ura</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Pinan+Sono+Go+Ura+Kyokushin"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 20 -->
+<div class="kata">
+<div class="kata-name">20. Yantsu</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/Hx-nw7IcNUM" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- 21 -->
+<div class="kata">
+<div class="kata-name">21. Tsuki no Kata</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/watch?v=SxDC9PEFTyg"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 22 -->
+<div class="kata">
+<div class="kata-name">22. Sanchin</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Sanchin+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 23 -->
+<div class="kata">
+<div class="kata-name">23. Gekisai Dai</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Gekisai+Dai+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 24 -->
+<div class="kata">
+<div class="kata-name">24. Gekisai Sho</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Gekisai+Sho+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 25 -->
+<div class="kata">
+<div class="kata-name">25. Saiha</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Saiha+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 26 -->
+<div class="kata">
+<div class="kata-name">26. Tensho</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Tensho+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 27 -->
+<div class="kata">
+<div class="kata-name">27. Garyu</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Garyu+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 28 -->
+<div class="kata">
+<div class="kata-name">28. Seienchin</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Seienchin+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 29 -->
+<div class="kata">
+<div class="kata-name">29. Seipai</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Seipai+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 30 -->
+<div class="kata">
+<div class="kata-name">30. Kanku Dai</div>
+<div class="card">
+<a class="video-link"
+href="https://www.youtube.com/results?search_query=Kanku+Dai+Kyokushin+kata"
+target="_blank">
+<div class="video-link-content">
+<div class="play">▶</div>
+<div class="video-link-text">Открыть видео</div>
+</div>
+</a>
+</div>
+</div>
+
+<!-- 31 -->
+<div class="kata">
+<div class="kata-name">31. Sushiho</div>
+<div class="card">
+<iframe src="https://www.youtube.com/embed/4SjQ5X2TBBw" allowfullscreen></iframe>
+</div>
+</div>
+
+</main>
+
+<script>
+
+function goTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function goBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
